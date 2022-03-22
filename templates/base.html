@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Blog of AP</title>
+    <meta name="description" content="A blog site was built by Allen Pocket!" />
+    <meta name="author" content="Allen Pocket" />
+
+    <link rel="stylesheet" href="{{ get_url(path='css/tw-prod.css') | safe }}" />
+
+    <!-- Font-Awesome -->
+    <script src="https://kit.fontawesome.com/a6dd2ded22.js" crossorigin="anonymous"></script>
+  </head>
+
+  <body class="bg-[#ffe162]">
+    {% block content %} {% endblock %}
+  </body>
+</html>

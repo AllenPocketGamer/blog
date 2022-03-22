@@ -1,0 +1,1 @@
+npx tailwindcss -i ./scss/tw-dev.css -o ./static/css/tw-prod.css --watch
