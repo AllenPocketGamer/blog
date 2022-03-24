@@ -46,7 +46,7 @@
     }
 
     #markdown pre {
-        @apply mx-12 mt-8 mb-4 rounded-md p-2 overflow-scroll;
+        @apply mx-12 mt-8 mb-4 rounded-xl p-2 overflow-scroll;
     }
 
     #markdown pre code mark {
@@ -95,8 +95,7 @@
     }
 
     #markdown img {
-        @apply mx-auto my-4;
-        border-radius: 30px;
+        @apply mx-auto my-4 rounded-xl;
     }
 
     #markdown ul {
