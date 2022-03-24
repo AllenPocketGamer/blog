@@ -108,8 +108,8 @@
         @apply list-decimal list-inside;
     }
 
-    #markdown ul p:first-child {@apply inline;}
-    #markdown ol p:first-child {@apply inline;}
+    #markdown ul p:first-child {@apply contents;}
+    #markdown ol p:first-child {@apply contents;}
 
     #markdown ul p:not(:first-child) {
         @apply px-7 my-4;
