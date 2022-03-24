@@ -6,6 +6,10 @@
 
 /* Extend for markdown */
 @layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
     #markdown h1 {
         @apply text-5xl font-bold mix-blend-multiply mt-16 mb-8;
     }
@@ -42,7 +46,7 @@
     }
 
     #markdown :not(pre) code {
-        @apply inline-block text-rose-500;
+        @apply inline-block text-rose-500 border-2 border-slate-500 rounded-lg px-[2px] mx-[2px];
     }
 
     #markdown pre {
@@ -89,8 +93,8 @@
         @apply font-custom-serif italic text-lg font-medium mix-blend-darken;
     }
 
-    #markdown a {
-        @apply inline-block font-normal underline-offset-1 decoration-blue-500 text-blue-500;
+    #markdown a:not([aria-label]) {
+        @apply inline-block font-normal underline-offset-1 decoration-blue-500 text-blue-500 mx-[2px];
         @apply hover:underline;
     }
 
