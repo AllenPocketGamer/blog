@@ -1,10 +1,122 @@
-@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Noto+Sans+SC:wght@400;700&family=Noto+Serif+SC:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-    font-family: 'source-han-sans';
-    src: url('../font/SourceHanSansCN-VF.otf');
+/* Extend for markdown */
+@layer base {
+    #markdown h1 {
+        @apply text-5xl font-bold mix-blend-multiply mt-16 mb-8;
+    }
+
+    #markdown h2 {
+        @apply text-4xl font-bold mix-blend-multiply mt-12 mb-6;
+    }
+
+    #markdown h3 {
+        @apply text-3xl font-bold mix-blend-multiply mt-8 mb-4;
+    }
+
+    #markdown h4 {
+        @apply text-2xl font-bold mix-blend-multiply mt-8 mb-4;
+    }
+
+    #markdown h5 {
+        @apply text-xl font-bold mix-blend-multiply mt-8 mb-4;
+    }
+
+    #markdown h6 {
+        @apply text-lg font-bold mix-blend-multiply mt-8 mb-4;
+    }
+
+    #markdown p {
+        @apply text-xl font-normal mt-8 mb-4;
+    }
+
+    .hr-dot, #markdown hr {
+        @apply w-full mix-blend-multiply my-4;
+        border: 1px dotted;
+        border-style: none none dashed;
+        border-color: #475577;
+    }
+
+    #markdown :not(pre) code {
+        @apply inline-block text-rose-500;
+    }
+
+    #markdown pre {
+        @apply mx-12 mt-8 mb-4 rounded-md p-2 overflow-scroll;
+    }
+
+    #markdown pre code mark {
+        color: inherit !important;
+        background-color: inherit !important;
+    }
+    
+    #markdown pre code mark span:not(:first-child) {
+        @apply underline underline-offset-1 decoration-rose-500 decoration-wavy;
+    }
+
+    #markdown pre code td:nth-child(2n+1) mark {
+        text-decoration-line: none;
+    }
+
+    #markdown pre code td:nth-child(2n+1) {
+        @apply select-none min-w-[36px];
+        border: 1px;
+        border-style: none solid none none;
+        border-color: #91c483;
+    }
+
+    #markdown pre code td:nth-child(2n) {
+        @apply pl-2;
+    }
+
+    #markdown pre code tbody {
+        @apply flex flex-col gap-y-[1px];
+        /* background-color: #999111; */
+    }
+
+    #markdown blockquote {
+        @apply px-12 mt-8 mb-4 rounded-xl;
+        border: 4px solid;
+        border-style: none none none solid;
+        border-color: #91c483;
+    }
+
+    #markdown blockquote p {
+        @apply font-custom-serif italic text-lg font-medium mix-blend-darken;
+    }
+
+    #markdown a {
+        @apply inline-block font-normal underline-offset-1 decoration-blue-500 text-blue-500;
+        @apply hover:underline;
+    }
+
+    #markdown img {
+        @apply mx-auto my-4;
+        border-radius: 30px;
+    }
+
+    #markdown ul {
+        @apply text-xl font-normal mt-8 mb-4;
+        @apply list-disc list-inside;
+    }
+
+    #markdown ol {
+        @apply text-xl font-normal mt-8 mb-4;
+        @apply list-decimal list-inside;
+    }
+
+    #markdown ul p:first-child {@apply inline;}
+    #markdown ol p:first-child {@apply inline;}
+
+    #markdown ul p:not(:first-child) {
+        @apply px-7 my-4;
+    }
+
+    #markdown ol p:not(:first-child) {
+        @apply px-5 my-4;
+    }
 }

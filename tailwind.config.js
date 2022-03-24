@@ -4,6 +4,8 @@ module.exports = {
     extend: {
       fontFamily: {
         'cursive': ['Amatic SC'],
+        'custom-sans': ['Noto Sans SC'],
+        'custom-serif': ['Noto Serif SC'],
       },
     },
   },

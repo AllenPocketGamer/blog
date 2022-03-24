@@ -1,8 +1,5 @@
 {% extends "base.html" %} {% block content %}
 
-<!-- TODO: Delete it -->
-<link rel="stylesheet" href="{{ get_url(path='css/tw-prod.css') | safe }}" />
-
 <!---------------------------------------------------------->
 <!-------------------------- HERO -------------------------->
 <!---------------------------------------------------------->
@@ -12,7 +9,7 @@
     <div class="basis-1/4"></div>
 
     <!-- profile signature -->
-    <div class="basis-1/4 flex flex-col justify-center items-center">
+    <div class="basis-1/4 flex flex-col justify-center items-center select-none">
       <p class="text-slate-700 font-cursive font-bold antialiased text-9xl text-center">Allen Pocket</p>
       <p class="text-slate-500 font-cursive font-extralight antialiased text-6xl text-center">
         focus on game / blockchain
@@ -20,7 +17,7 @@
     </div>
 
     <!-- github button -->
-    <div class="basis-1/4 flex justify-center items-center">
+    <div class="basis-1/4 flex justify-center items-center select-none">
       <a
         class="text-green-100 text-6xl font-cursive font-extralight px-10 py-3 rounded-lg antialiased inline-flex items-center gap-x-4 transition ease-in-out bg-[#91c483] shadow-[0_5px_6px_rgba(0,0,0,0.25)] hover:shadow-[0_2px_2px_rgba(0,0,0,0.25)] hover:translate-y-1"
         href="https://github.com/AllenPocketGamer"
@@ -32,13 +29,13 @@
   </div>
 </div>
 
-<div class="container h-screen mx-auto rounded-md py-12 px-6 bg-[#91c483]">
-  <ul class="flex flex-col gap-y-14">
+<div class="bg-[#91c483] max-w-5xl container mx-auto rounded-md py-12 px-6">
+  <ul class="flex flex-col gap-y-14 text-slate-700">
     {% for page in section.pages %}
     <li class="flex flex-col rounded-md shadow-[0_3px_12px_rgba(0,0,0,0.25)] transition ease-in-out hover:-translate-y-4 hover:shadow-[0_8px_12px_rgba(0,0,0,0.25)] duration-200">
       <a href="{{ page.permalink | safe }}" class="px-10 py-16">
-        <p class="text-slate-800 font-semibold text-4xl font-sans antialiased">{{ page.title }}</p>
-        <p class="text-slate-600 font-light text-xl font-sans antialiased mt-4">
+        <p class="mix-blend-multiply font-semibold text-4xl font-custom-sans antialiased">{{ page.title }}</p>
+        <p class="mix-blend-darken font-light text-xl font-custom-sans antialiased mt-4">
           {% if page.summary %} {{ page.summary | striptags }} {% endif %}
         </p>
       </a>

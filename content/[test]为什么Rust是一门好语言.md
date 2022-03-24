@@ -1,127 +1,101 @@
 +++
 title = "|简单教程| 为什么Rust是一门好语言"
+slug = "why-rust-is-a-good-language"
 date = 2019-11-27
 +++
 
 月光如流水一般，静静地泻在这一片叶子和花上。薄薄的青雾浮起在荷塘里。叶子和花仿佛在牛乳中洗过一样；又像笼着轻纱的梦。虽然是满月，天上却有一层淡淡的云，所以不能朗照；但我以为这恰是到了好处——酣眠固不可少，小睡也别有风味的。月光是隔了树照过来的，高处丛生的灌木，落下参差的斑驳的黑影，峭楞楞如鬼一般；弯弯的杨柳的稀疏的倩影，却又像是画在荷叶上。塘中的月色并不均匀；但光与影有着和谐的旋律，如梵婀玲⑼上奏着的名曲。
 <!-- more -->
-
-# Markdown Cheat Sheet
-
-Thanks for visiting [The Markdown Guide](https://www.markdownguide.org)!
-
-This Markdown cheat sheet provides a quick overview of all the Markdown syntax elements. It can’t cover every edge case, so if you need more information about any of these elements, refer to the reference guides for [basic syntax](https://www.markdownguide.org/basic-syntax) and [extended syntax](https://www.markdownguide.org/extended-syntax).
-
-## Basic Syntax
-
-These are the elements outlined in John Gruber’s original design document. All Markdown applications support these elements.
-
-### Heading
-
-# H1
-## H2
-### H3
-
-### Bold
-
-**bold text**
-
-### Italic
-
-*italicized text*
-
-### Blockquote
-
-> blockquote
-
-### Ordered List
-
-1. First item
-2. Second item
-3. Third item
-
-### Unordered List
-
-- First item
-- Second item
-- Third item
-
-### Code
-
-`code`
-
-### Horizontal Rule
+# 一级标题
 
 ---
 
-### Link
+月光如流水一般，静静地泻在这一片叶子和花上。薄薄的青雾浮起在荷塘里。叶子和花仿佛在牛乳中洗过一样；又像笼着轻纱的梦。虽然是满月，天上却有一层淡淡的云，所以不能朗照；但我以为这恰是到了好处——酣眠固不可少，小睡也别有风味的。月光是隔了树照过来的，高处丛生的灌木，落下参差的斑驳的黑影，峭楞楞如鬼一般；弯弯的杨柳的稀疏的倩影，却又像是画在荷叶上。塘中的月色并不均匀；但光与影有着和谐的旋律，如梵婀玲⑼上奏着的名曲。
 
-[Markdown Guide](https://www.markdownguide.org)
+月光如流水一般，静静地泻在这一片叶子和花上。薄薄的青雾浮起在荷塘里。叶子和花仿佛在牛乳中洗过一样；又像笼着轻纱的梦。虽然是满月，天上却有一层淡淡的云，所以不能朗照；但我以为这恰是到了好处——酣眠固不可少，小睡也别有风味的。月光是隔了树照过来的，高处丛生的灌木，落下参差的斑驳的黑影，峭楞楞如鬼一般；弯弯的杨柳的稀疏的倩影，却又像是画在荷叶上。塘中的月色并不均匀；但光与影有着和谐的旋律，如梵婀玲⑼上奏着的名曲。
 
-### Image
+## 二级: 代码块
 
-![alt text](https://www.markdownguide.org/assets/images/tux.png)
+---
 
-## Extended Syntax
+```rust,linenos,hl_lines=2 7 13
+fn hello() {
+  let args: Vec<String> = std::env::args().collect();
+  if args.get(1) != Some(&"nonlocal".to_string()) {
+      // Run tests
+      cmd!("cargo test --workspace")
+          .run()
+          .expect("Please fix failing tests in output above.");
 
-These elements extend the basic syntax by adding additional features. Not all Markdown applications support these elements.
-
-### Table
-
-| Syntax | Description |
-| ----------- | ----------- |
-| Header | Title |
-| Paragraph | Text |
-
-### Fenced Code Block
-
-```
-{
-  "firstName": "John",
-  "lastName": "Smith",
-  "age": 25
+      // Run doc tests: these are ignored by `cargo test`
+      cmd!("cargo test --doc --workspace")
+          .run()
+          .expect("Please fix failing doc-tests in output above.");
 }
 ```
 
-### Footnote
+```rust,hl_lines=2
+fn hello() {
+  let p = 13;
+  println!("Hello World");
+  println!("Hello World");
+}
+```
 
-Here's a sentence with a footnote. [^1]
+### 三级: 无序列表/有序列表/任务链表
 
-[^1]: This is the footnote.
+---
 
-### Heading ID
+- George Washington
 
-### My Great Heading {#custom-id}
+  George Washington月光如流水一般，静静地泻在这一片叶子和花上。薄薄的青雾浮起在荷塘里。叶子和花仿佛在牛乳中洗过一样；又像笼着轻纱的梦。月光如流水一般，静静地泻在这一片叶子和花上。薄薄的青雾浮起在荷塘里。叶子和花仿佛在牛乳中洗过一样；又像笼着轻纱的梦。
+- John Adams
 
-### Definition List
+  月光如流水一般，静静地泻在这一片叶子和花上。薄薄的青雾浮起在荷塘里。叶子和花仿佛在牛乳中洗过一样；又像笼着轻纱的梦。月光如流水一般，静静地泻在这一片叶子和花上。薄薄的青雾浮起在荷塘里。叶子和花仿佛在牛乳中洗过一样；又像笼着轻纱的梦。
+- Thomas Jefferson
 
-term
-: definition
+1. James Madison
 
-### Strikethrough
+    James Madison月光如流水一般，静静地泻在这一片叶子和花上。薄薄的青雾浮起在荷塘里。叶子和花仿佛在牛乳中洗过一样；又像笼着轻纱的梦。月光如流水一般，静静地泻在这一片叶子和花上。薄薄的青雾浮起在荷塘里。叶子和花仿佛在牛乳中洗过一样；又像笼着轻纱的梦。
+2. James Monroe
+3. John Quincy Adams
 
-~~The world is flat.~~
+#### 四级: 链接/图片
 
-### Task List
+---
 
-- [x] Write the press release
-- [ ] Update the website
-- [ ] Contact the media
+月光如流水一般，[静静地泻在这一片叶子和花上](https://github.com/AllenPocketGamer)。薄薄的青雾浮起在荷塘里。叶子和花仿佛在牛乳中洗过一样；又像笼着轻纱的梦。虽然是满月，天上却有一层淡淡的云，所以不能朗照；但我以为这恰是到了好处——酣眠固不可少，小睡也别有风味的。月光是隔了树照过来的，高处丛生的灌木，落下参差的斑驳的黑影，峭楞楞如鬼一般；弯弯的杨柳的稀疏的倩影，却又像是画在荷叶上。塘中的月色并不均匀；但光与影有着和谐的旋律，如梵婀玲⑼上奏着的名曲。
 
-### Emoji
 
-That is so funny! :joy:
 
-(See also [Copying and Pasting Emoji](https://www.markdownguide.org/extended-syntax/#copying-and-pasting-emoji))
+这是我的[GITHUB](https://github.com/AllenPocketGamer), 请查看.
 
-### Highlight
+![This is an image](/image/place-hold-img.jpg)
 
-I need to highlight these ==very important words==.
+![This is an image too](/image/sample.png)
 
-### Subscript
+##### 五级: 引用文本/引用标题
 
-H~2~O
+---
 
-### Superscript
+>如果您还不了解 Rust，那么请先阅读 Rust 程序设计语言。 它将会帮您理清思路：Rust 是什么样的语言、如何安装它、以及它的语法概念（syntax and concepts）。 在看完本书后，您将成为一个登堂入室（intermediate）的 Rust 开发人员，并将很好地理解 Rust 背后的基本理念。
 
-X^2^
+`月光如流水一般，静静地泻在这一片叶子和花上`。
+薄薄的青雾浮起在荷塘里。叶子和花仿佛在牛乳中洗过一样；又像笼着轻纱的梦。
+虽然是满月，天上却有一层淡淡的云，所以不能`朗照`；但我以为这恰是到了好处——酣眠固不可少，小睡也别有风味的。
+月光是隔了树照过来的，高处丛生的灌木，`落下参差的斑驳`的黑影，峭楞楞如鬼一般；
+弯弯的杨柳的稀疏的倩影，却又像是画在荷叶上。塘中的月`色并`不均匀；但光与影有着和谐的旋律，如梵婀玲⑼上奏着的名曲。
+在`Dfinity`中, 使用的是`Rust`语言进行开发!
+
+> There is no doubt that he is the choosen one!
+
+###### 六级: 粗体/斜体/删除线
+
+---
+
+__月光如流水一般，静静地泻在这一片叶子和花上。薄薄的青雾浮起在荷塘里。__
+_叶子和花仿佛在牛乳中洗过一样；又像笼着轻纱的梦。_
+~~虽然是满月，天上却有一层淡淡的云，所以不能朗照；但我以为这恰是到了好处——酣眠固不可少，小睡也别有风味的。~~
+__月光是隔了树照过来的__，_高处丛生的灌木_，~~落下参差的斑驳的黑影，峭楞楞如鬼一般~~；
+***弯弯的杨柳的稀疏的倩影，却又像是画在荷叶上。***
+**塘中的月色并不均匀；_但光与影有着和谐的旋律_，如梵婀玲⑼上奏着的名曲**。
