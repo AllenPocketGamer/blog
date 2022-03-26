@@ -60,6 +60,7 @@
     
     #markdown pre code mark span:not(:first-child) {
         @apply underline underline-offset-1 decoration-rose-500 decoration-wavy;
+        text-decoration-skip-ink: none;
     }
 
     #markdown pre code td:nth-child(2n+1) mark {

@@ -74,9 +74,9 @@ fn hello() {
 
 这是我的[GITHUB](https://github.com/AllenPocketGamer), 请查看.
 
-![This is an image](/image/place-hold-img.jpg)
-
 ![This is an image too](/image/sample.png)
+
+![This is an image](/image/place-hold-img.jpg)
 
 ##### 五级: 引用文本/引用标题
 
