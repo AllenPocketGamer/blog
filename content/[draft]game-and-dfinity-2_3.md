@@ -1,9 +1,9 @@
 +++
-title = "|简单教程| How to build a static web site"
-date = 2019-11-27
+title = "|game X chain| Dfinity游戏开发实践(2/3)"
+date = 2022-03-16
 +++
 
-Now we are engaged in a great civil war, testing whether that nation, or any nation so conceived and so dedicated, can long endure. We are met on a great battle-field of that war. We have come to dedicate a portion of that field, as a final resting place for those who here gave their lives that that nation might live. It is altogether fitting and proper that we should do this.
+资料整理中...
 <!-- more -->
 
 # Markdown Cheat Sheet
