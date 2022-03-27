@@ -1,6 +1,9 @@
 +++
-title = "|game X chain| Dfinity游戏开发实践(1/3)"
+title = "|game X biology| 游戏与人工生命(1/3)"
 date = 2022-03-25
+
+[extra]
+bgcolor = "bg-orange-400"
 +++
 
 资料整理中...

@@ -1,6 +1,9 @@
 +++
 title = "|game X chain| Dfinity游戏开发实践(2/3)"
 date = 2022-03-16
+
+[extra]
+bgcolor = "bg-[#91c483]"
 +++
 
 资料整理中...
