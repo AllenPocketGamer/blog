@@ -910,6 +910,10 @@ html {
   border-bottom-width: 1px;
 }
 
+.border-b-\[2px\]{
+  border-bottom-width: 2px;
+}
+
 .border-dashed{
   border-style: dashed;
 }
@@ -917,11 +921,6 @@ html {
 .border-slate-600{
   --tw-border-opacity: 1;
   border-color: rgb(71 85 105 / var(--tw-border-opacity));
-}
-
-.border-\[\#475577\]{
-  --tw-border-opacity: 1;
-  border-color: rgb(71 85 119 / var(--tw-border-opacity));
 }
 
 .border-slate-700{
@@ -1106,12 +1105,6 @@ html {
 .shadow-\[0_5px_6px_rgba\(0\2c 0\2c 0\2c 0\.25\)\]{
   --tw-shadow: 0 5px 6px rgba(0,0,0,0.25);
   --tw-shadow-colored: 0 5px 6px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.shadow-\[0_2px_16px_rgba\(0\2c 0\2c 0\2c 0\.25\)\]{
-  --tw-shadow: 0 2px 16px rgba(0,0,0,0.25);
-  --tw-shadow-colored: 0 2px 16px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
