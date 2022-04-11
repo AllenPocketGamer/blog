@@ -46,7 +46,7 @@
     }
 
     #markdown :not(pre) code {
-        @apply inline-block text-rose-500 border-2 border-slate-500 rounded-lg px-[2px] mx-[2px];
+        @apply inline-block text-rose-500 border-2 border-slate-500 rounded-lg px-[2px] mx-[2px] my-[1px];
     }
 
     #markdown pre {
