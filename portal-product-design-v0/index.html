@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Allen-Pocket Blog</title>
+    <meta name="description" content="A blog site was built by Allen Pocket!" />
+    <meta name="author" content="Allen Pocket" />
+
+    <link rel="stylesheet" href="https://allenpocket.work/css/tw-prod.css" />
+
+    <!-- Font-Awesome -->
+    <script src="https://kit.fontawesome.com/a6dd2ded22.js" crossorigin="anonymous"></script>
+  </head>
+
+  <body class="bg-[#ffe162]">
+    
+
+<link rel="stylesheet" href="https://allenpocket.work/css/tw-prod.css" />
+
+<div
+  class="w-screen h-16 border-b-[2px] border-dashed border-slate-700 sticky -top-36 bg-inherit z-10 flex items-center justify-center select-none"
+>
+  <a href=https://allenpocket.work class="text-slate-700 font-cursive font-bold antialiased text-4xl text-center sticky top-0.5">Allen Pocket</a>
+</div>
+
+<div class="container mx-auto max-w-4xl pt-24 pb-12 px-6 z-0">
+  <div class="text-slate-700 font-custom-sans antialiased">
+    <h1 class="text-4xl mix-blend-multiply text-center font-bold mb-16">|ShiKu-Labs| Portal产品设计草案V0</h1>
+
+    <section class="mb-16">
+      <p class="text-lg mix-blend-color-burn text-right my-2 pr-4">2022-04-18</p>
+      <hr class="hr-dot" />
+    </section>
+
+    <div id="markdown"><p>当前native应用缺乏与IC交互的手段，Portal希望在两者间充当中介，为应用开发者提供舒适的开发体验(指接入IC生态)。</p>
+<span id="continue-reading"></span><h2 id="tong-dian-1-kai-fa-ceng-mian-ying-yong-ru-he-yu-icjin-xing-jiao-hu"><a class="zola-anchor fa-solid fa-link mr-2 transition ease-in-out duration-200 hover:scale-110 text-blue-500" href="#tong-dian-1-kai-fa-ceng-mian-ying-yong-ru-he-yu-icjin-xing-jiao-hu" aria-label="Anchor link for: tong-dian-1-kai-fa-ceng-mian-ying-yong-ru-he-yu-icjin-xing-jiao-hu"></a>痛点1(开发层面): 应用如何与IC进行交互</h2>
+<p><strong>Internet Computer(IC)</strong>, 是部署在英特网上的分布式应用; 外部若想与IC进行交互, 则需要使用agent接口。agent是一套规范，它主要描述了如何构造Actor(智能合约的实例, 用于与部署在IC上的智能合约交互)以及如何构造Agent(用户实例: 用于对交互操作签名)。</p>
+<p>IC现有的agent接口实现有: agent-js(官方), agent-rs(官方), 以及agent-dart(社区)。可以发现, 对于native应用而言(Java, Cpp, Csharp, Swift..), 想接入IC生态, 的确不是一件容易的事, 因为首先, 它们得为自己选择的语言实现agent接口规范(例如agent-java, agent-cpp, agent-cs..)。</p>
+<h3 id="chuan-tong-fang-shi"><a class="zola-anchor fa-solid fa-link mr-2 transition ease-in-out duration-200 hover:scale-110 text-blue-500" href="#chuan-tong-fang-shi" aria-label="Anchor link for: chuan-tong-fang-shi"></a>传统方式</h3>
+<p>假如没有Portal, 那么native应用想要与IC交互, 就类似于下图:</p>
+<p><img src="./app-interact-with-ic.png" alt="app-interact-with-ic" /></p>
+<p>在使用上, 类似于下面:</p>
+<pre data-lang="js" style="background-color:#282828;color:#fdf4c1aa;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#fa5c4b;">import </span><span style="color:#fdf4c1;">fetch </span><span style="color:#fa5c4b;">from </span><span style="color:#b8bb26;">&quot;node-fetch&quot;</span><span>;
+</span><span style="color:#fa5c4b;">import </span><span>{ </span><span style="color:#fdf4c1;">Actor</span><span>, </span><span style="color:#fdf4c1;">HttpAgent </span><span>} </span><span style="color:#fa5c4b;">from </span><span style="color:#b8bb26;">&quot;@dfinity/agent&quot;</span><span>;
+</span><span style="color:#fa5c4b;">import </span><span>{ </span><span style="color:#fdf4c1;">idlFactory </span><span>} </span><span style="color:#fa5c4b;">from </span><span style="color:#b8bb26;">&quot;./root.did.js&quot;</span><span>;
+</span><span style="color:#fa5c4b;">import </span><span>{ </span><span style="color:#fdf4c1;">Principal </span><span>} </span><span style="color:#fa5c4b;">from </span><span style="color:#b8bb26;">&quot;@dfinity/principal&quot;</span><span>;
+</span><span>
+</span><span style="font-style:italic;color:#928374;">// 1. 指定连接的主网, 以及用户身份(这里没填, 可以是传统的私钥, 或webAuth)
+</span><span style="color:#fa5c4b;">const </span><span style="color:#fdf4c1;">agent </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">new </span><span style="color:#8ec07c;">HttpAgent</span><span>({ host: </span><span style="color:#b8bb26;">&quot;https://ic0.app&quot;</span><span>, fetch: </span><span style="color:#fdf4c1;">fetch </span><span>});
+</span><span>
+</span><span style="font-style:italic;color:#928374;">// 2. 构造Actor, 需要智能合约的Id以及Candid(一种描述智能合约的文件)
+</span><span style="color:#fa5c4b;">const </span><span style="color:#fdf4c1;">principal </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">Principal.</span><span style="color:#8ec07c;">fromText</span><span>(</span><span style="color:#b8bb26;">&quot;rdmx6-jaaaa-aaaaa-aaadq-cai&quot;</span><span>);
+</span><span style="color:#fa5c4b;">const </span><span style="color:#fdf4c1;">actor </span><span style="color:#fe8019;">= </span><span style="color:#fdf4c1;">Actor.</span><span style="color:#8ec07c;">createActor</span><span>(</span><span style="color:#fdf4c1;">idlFactory</span><span>, { agent: </span><span style="color:#fdf4c1;">agent</span><span>, canisterId: </span><span style="color:#fdf4c1;">principal </span><span>});
+</span><span>
+</span><span style="font-style:italic;color:#928374;">// 3. 调用智能合约并输出结果
+</span><span style="color:#fa5c4b;">const </span><span style="color:#fdf4c1;">result </span><span style="color:#fe8019;">= </span><span style="color:#fa5c4b;">await </span><span style="color:#fdf4c1;">actor.</span><span style="color:#8ec07c;">stats</span><span>();
+</span><span style="color:#8ec07c;">console</span><span style="color:#fdf4c1;">.</span><span style="color:#fabd2f;">log</span><span>(</span><span style="color:#fdf4c1;">result</span><span>);
+</span></code></pre>
+<p>emm, 乍看之下使用起来还是满方便的, 但实际使用起来, 却会面临很多的问题。</p>
+<h3 id="chuan-tong-fang-an-de-que-dian"><a class="zola-anchor fa-solid fa-link mr-2 transition ease-in-out duration-200 hover:scale-110 text-blue-500" href="#chuan-tong-fang-an-de-que-dian" aria-label="Anchor link for: chuan-tong-fang-an-de-que-dian"></a>传统方案的缺点</h3>
+<ol>
+<li>假如agent并没有你偏好语言的实现, 那么你必须亲自动手写一个, 或者等社区帮你实现;</li>
+<li>涉及到update的智能合约交易, 需要用户对交易进行签名, 那么如何取信用户, 让他相信你不会拿着他的私钥去作恶?</li>
+<li>假如我想让用户通过II(Internet Identity)来登陆我的应用, 该怎么做, 徒手撸出II前端与II后端交互? 这可是个大活儿。</li>
+<li>我想要与智能合约交互, 害得获得智能合约的接口描述(Candid), 构造Actor, 能不能直接通过智能合约Id调用合约功能?</li>
+<li>智能合约更新了咋整, 下载新的Candid然后再编译?</li>
+</ol>
+<h3 id="portalti-gong-de-jie-jue-fang-an"><a class="zola-anchor fa-solid fa-link mr-2 transition ease-in-out duration-200 hover:scale-110 text-blue-500" href="#portalti-gong-de-jie-jue-fang-an" aria-label="Anchor link for: portalti-gong-de-jie-jue-fang-an"></a>Portal提供的解决方案</h3>
+<p>事实上, 你可以把agent理解成一种语言(指现实中的语言, 例如英语), agent-js就是一本双向词典, js应用拿着这本词典与只会讲agent语言的IC进行沟通; 同样agent-rs, agent-dart也是如此。</p>
+<p>而Portal给的方案, 就是把agent-xx词典活化, 变成一个翻译, 站在中间, 帮助应用与IC进行沟通。</p>
+<p>相比于传统的方案, Portal仅需要支付一点代价(使用者需要安装Portal), 就可以直接与IC进行沟通; 而不需要使用agent-xx, 避免其带来的问题。</p>
+<p><img src="./app-interact-with-portal.png" alt="app-interact-with-portal" /></p>
+<p>使用上类似下列代码:</p>
+<pre data-lang="rust" style="background-color:#282828;color:#fdf4c1aa;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#928374;">// portal即连接Portal应用的websocket
+</span><span style="color:#fa5c4b;">let</span><span> response </span><span style="color:#fe8019;">=</span><span> await portal.</span><span style="color:#fabd2f;">query</span><span>(</span><span style="color:#b8bb26;">&quot;rdmx6-jaaaa-aaaaa-aaadq-cai&quot;</span><span>, </span><span style="color:#b8bb26;">&quot;stats&quot;</span><span>);
+</span><span style="color:#fabd2f;">println!</span><span>(response);
+</span></code></pre>
+<h3 id="portalfang-an-de-you-que-dian"><a class="zola-anchor fa-solid fa-link mr-2 transition ease-in-out duration-200 hover:scale-110 text-blue-500" href="#portalfang-an-de-you-que-dian" aria-label="Anchor link for: portalfang-an-de-you-que-dian"></a>Portal方案的优缺点</h3>
+<p>相比于传统方式, Portal方案有以下优点:</p>
+<ol>
+<li>语言无关, 只要语言支持websocket协议(绝大部分都支持), 就能与Portal建立连接, 之后通过简单的<strong>json-rpc</strong>与IC进行代理沟通;</li>
+<li>update交易的签名部分由Portal代劳(换句话说, Portal会提供一个类似钱包的功能), 且Portal计划开源, 解决用户信任问题;</li>
+<li>Portal会将一些重要的IC应用(例如II)集成, 并提供简单的接口给应用, 例如II登陆;</li>
+<li>使用Portal无需管理Candid(一种智能合约接口描述, IDL), 指定智能合约Id即可调用合约功能;</li>
+<li>提供智能合约Id, 自动获得智能合约描述;</li>
+</ol>
+<p>但也不是没有缺点:</p>
+<ol>
+<li>需要下载Portal应用, 没有Portal的话应用将无法使用;</li>
+<li>需要对websocket进行简单封装;</li>
+<li>因为使用的是json-rpc, 需要自主对类型进行转换;</li>
+</ol>
+<h2 id="tong-dian-2-kai-fa-ceng-mian-nativeying-yong-ru-he-huo-de-yong-hu-shen-fen-xin-xi"><a class="zola-anchor fa-solid fa-link mr-2 transition ease-in-out duration-200 hover:scale-110 text-blue-500" href="#tong-dian-2-kai-fa-ceng-mian-nativeying-yong-ru-he-huo-de-yong-hu-shen-fen-xin-xi" aria-label="Anchor link for: tong-dian-2-kai-fa-ceng-mian-nativeying-yong-ru-he-huo-de-yong-hu-shen-fen-xin-xi"></a>痛点2(开发层面): Native应用如何获得用户身份信息</h2>
+<p>可以看这里, <a href="https://allenpocket.work/ii-research-report-v0/#xian-zhuang">上篇</a>介绍过。</p>
+<h3 id="portalti-gong-de-jie-jue-fang-an-1"><a class="zola-anchor fa-solid fa-link mr-2 transition ease-in-out duration-200 hover:scale-110 text-blue-500" href="#portalti-gong-de-jie-jue-fang-an-1" aria-label="Anchor link for: portalti-gong-de-jie-jue-fang-an-1"></a>Portal提供的解决方案</h3>
+<p>Portal会集成II(II分为前后端两部分, portal模拟II前端与II后端进行交互), 并向应用提供简单接口, 方便其获取用户身份;</p>
+<p>Portal同时会提供一个钱包功能, 方便没有安全硬件的用户使用传统的私钥来保存其账户。</p>
+<h3 id="ji-yu-fang-an-de-wei-lai-yan-sheng"><a class="zola-anchor fa-solid fa-link mr-2 transition ease-in-out duration-200 hover:scale-110 text-blue-500" href="#ji-yu-fang-an-de-wei-lai-yan-sheng" aria-label="Anchor link for: ji-yu-fang-an-de-wei-lai-yan-sheng"></a>基于方案的未来衍生</h3>
+<p>随着IC生态的发展, Portal会集成一些公益的, 重要的IC应用进来(例如NFT系统, IM系统, 拍卖系统..), 向应用暴露一些封装后的接口, 方便应用快速开发, 与IC形成联动。</p>
+<h2 id="tong-dian-3-kai-fa-ceng-mian-nativeying-yong-jie-ru-icsheng-tai-de-kai-fa-tao-jian"><a class="zola-anchor fa-solid fa-link mr-2 transition ease-in-out duration-200 hover:scale-110 text-blue-500" href="#tong-dian-3-kai-fa-ceng-mian-nativeying-yong-jie-ru-icsheng-tai-de-kai-fa-tao-jian" aria-label="Anchor link for: tong-dian-3-kai-fa-ceng-mian-nativeying-yong-jie-ru-icsheng-tai-de-kai-fa-tao-jian"></a>痛点3(开发层面): Native应用接入IC生态的开发套件</h2>
+<p>在开发的时候, 开发者希望能在本地环境进行测试, 他们往往需要自定义部署一些智能合约, 控制部分智能合约的状态, 检查发送/接收的包裹中的内容, 监控IC网络的状态等等。</p>
+<p>我们希望, Portal应用之后能为这些开发者提供一套开发套件(与dfx不同, dfx是针对web应用开发的开发套件, 且在windows环境中难以使用, wsl不算), 满足他们这些需求。</p>
+<ol>
+<li>本地测试网</li>
+</ol>
+<p>Portal会向开发者提供IC本地测试网, 方便本地测试(对windows环境比较急迫);</p>
+<ol start="2">
+<li>智能合约搜索/上传/下载/安装</li>
+</ol>
+<p>本地测试的时候, 因为应用依赖一些主网的智能合约, 需要测试网也配置这些智能合约。Portal应提供智能合约的下载/安装服务, 将主网的智能合约快速安装到本地, 完成测试环境部署。</p>
+<p>同样, 本地开发的智能合约也可以快速上传到主网, 类似dfx套件提供的功能;</p>
+<ol start="3">
+<li>包裹的拆解</li>
+</ol>
+<p>很多时候, 开发者要确认IC或应用发送的包裹符合预期, 要对包裹拆开进行检查(拆包); Portal会提供历史面板, 列出通过Portal传递的所有包裹信息, 帮助开发者更好的定位问题。</p>
+<h2 id="tong-dian-4-kai-fa-ceng-mian-lei-websocketxie-yi"><a class="zola-anchor fa-solid fa-link mr-2 transition ease-in-out duration-200 hover:scale-110 text-blue-500" href="#tong-dian-4-kai-fa-ceng-mian-lei-websocketxie-yi" aria-label="Anchor link for: tong-dian-4-kai-fa-ceng-mian-lei-websocketxie-yi"></a>痛点4(开发层面): 类websocket协议</h2>
+<p>IC当前并不支持双工协议(长时间, 双向通信), 这对很对应用的开发造成了困难。</p>
+<p>相关讨论可以看这篇<a href="https://forum.dfinity.org/t/websocket-support/1869/5">关于websocket支持的帖子</a>, 其中说明了当前的双工协议的patch方法(使用轮询), 和IC实现双工协议的难点, 以及可能的方案。</p>
+<p>而在Portal这里, 可以向开发者提供伪双工协议, 隐藏其具体实现(使用轮询), 提升开发体验。</p>
+</div>
+  </div>
+</div>
+
+
+  </body>
+</html>
